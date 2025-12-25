@@ -17,6 +17,14 @@ function App() {
     if (!cards || cards.length === 0) {
       setCards(defaultCards);
     }
+    try {
+      (cards ?? []).slice(0, 5).forEach((c) => {
+        const img = new Image();
+        img.decoding = 'async' as any;
+        img.loading = 'eager' as any;
+        img.src = c.image;
+      });
+    } catch {}
   }, []);
 
   const handleSpinComplete = (card: Postcard) => {

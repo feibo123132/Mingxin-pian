@@ -19,6 +19,8 @@ const ResultModal: React.FC<ResultModalProps> = ({ card, isOpen, onClose, onSpin
           <img 
             src={card.image} 
             alt={card.title}
+            decoding="async"
+            loading="eager"
             className="w-60 h-60 object-cover rounded-lg shadow-md"
           />
         </div>

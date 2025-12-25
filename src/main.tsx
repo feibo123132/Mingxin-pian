@@ -8,3 +8,9 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 )
+
+if ('serviceWorker' in navigator) {
+  const base = (import.meta.env.BASE_URL || '/');
+  const prefix = base.endsWith('/') ? base : base + '/';
+  navigator.serviceWorker.register(`${prefix}sw.js`).catch(() => {});
+}
