@@ -25,7 +25,7 @@ jobs:
         with:
           version: 8
       - name: Install deps
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
       - name: Build with base path
         run: |
           REPO_NAME=${{ github.event.repository.name }}
