@@ -16,13 +16,15 @@ const Wheel: React.FC<WheelProps> = ({ cards, onSpinComplete }) => {
   const lastSelectedIndexRef = useRef<number>(0);
 
   useEffect(() => {
-    const audio = new Audio(new URL('audio/spin.mp3', import.meta.env.BASE_URL).href);
+    const base = import.meta.env.BASE_URL || '/';
+    const prefix = base.endsWith('/') ? base : base + '/';
+    const audio = new Audio(`${prefix}audio/spin.mp3`);
     audio.preload = 'auto';
     audio.loop = true;
     audioRef.current = audio;
     selectionAudiosRef.current = cards.map((c, i) => {
-      const href = new URL(c.sound || `audio/card${i + 1}.mp3`, import.meta.env.BASE_URL).href;
-      const a = new Audio(href);
+      const p = (c.sound || `audio/card${i + 1}.mp3`).replace(/^\/+/, '');
+      const a = new Audio(`${prefix}${p}`);
       a.preload = 'auto';
       a.loop = false;
       return a;
