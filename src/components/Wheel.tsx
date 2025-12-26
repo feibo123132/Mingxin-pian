@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Postcard } from '../data/defaultCards';
+import { useAudioBus } from '../store/audioBus';
 
 interface WheelProps {
   cards: Postcard[];
@@ -50,6 +51,11 @@ const Wheel: React.FC<WheelProps> = ({ cards, onSpinComplete }) => {
         audioRef.current.currentTime = 0;
         audioRef.current.volume = 0.9;
         audioRef.current.play().catch(() => {});
+        try { useAudioBus.getState().startEffect() } catch {}
+        audioRef.current.onended = () => {
+          try { useAudioBus.getState().endEffect() } catch {}
+          audioRef.current && (audioRef.current.onended = null)
+        }
       }
     } catch {}
     
@@ -74,7 +80,8 @@ const Wheel: React.FC<WheelProps> = ({ cards, onSpinComplete }) => {
       if (audioRef.current) {
         audioRef.current.loop = false;
         audioRef.current.onended = () => {
-          audioRef.current && (audioRef.current.onended = null);
+          try { useAudioBus.getState().endEffect() } catch {}
+          audioRef.current && (audioRef.current.onended = null)
         };
       }
       const a = selectionAudiosRef.current[lastSelectedIndexRef.current];
@@ -82,6 +89,11 @@ const Wheel: React.FC<WheelProps> = ({ cards, onSpinComplete }) => {
         try {
           a.currentTime = 0;
           a.play().catch(() => {});
+          try { useAudioBus.getState().startEffect() } catch {}
+          a.onended = () => {
+            try { useAudioBus.getState().endEffect() } catch {}
+            a.onended = null
+          }
         } catch {}
       }
       onSpinComplete(selectedCard);

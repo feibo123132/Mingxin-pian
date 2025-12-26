@@ -3,6 +3,7 @@ import { Settings, Gift } from 'lucide-react';
 import Wheel from './components/Wheel';
 import ResultModal from './components/ResultModal';
 import SettingsModal from './components/SettingsModal';
+import BgmController from './components/BgmController';
 import useLocalStorage from './hooks/useLocalStorage';
 import { Postcard, defaultCards } from './data/defaultCards';
 
@@ -61,6 +62,7 @@ function App() {
           >
             <Settings className="w-6 h-6" />
           </button>
+          <BgmController />
         </div>
 
         {/* Wheel Component */}
