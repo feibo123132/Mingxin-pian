@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, Gift } from 'lucide-react';
+// 替换图标为节日emoji
 import Wheel from './components/Wheel';
 import ResultModal from './components/ResultModal';
 import SettingsModal from './components/SettingsModal';
@@ -50,17 +50,19 @@ function App() {
         {/* Header */}
         <div className="w-full max-w-md mb-8 relative">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Gift className="w-8 h-8 text-[#FFD748]" />
-            <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: 'Source Han Sans CN, sans-serif' }}>明信片抽卡</h1>
+            <span role="img" aria-label="圣诞老人" className="text-3xl">🎅</span>
+            <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: 'Source Han Sans CN, sans-serif' }}>圣诞大转盘</h1>
           </div>
-          <p className="text-center text-gray-600" style={{ fontSize: '16px' }}>点击GO按钮，抽取你的幸运明信片！</p>
+          <p className="text-center text-gray-600" style={{ fontSize: '16px' }}>点击社团LOGO按钮，抽取你的幸运明信片！</p>
           
           {/* Settings Button */}
           <button
             onClick={() => setIsSettingsModalOpen(true)}
-            className="absolute top-0 right-0 p-2 text-gray-600 hover:text-gray-800 transition-colors"
+            className="absolute top-0 right-0 p-2 text-gray-600 hover:text-gray-800 transition-colors animate-breath"
+            aria-label="设置"
+            title="设置"
           >
-            <Settings className="w-6 h-6" />
+            <span role="img" aria-label="圣诞树" className="text-xl">🎄</span>
           </button>
           <BgmController />
         </div>
@@ -91,7 +93,7 @@ function App() {
 
         {/* Footer */}
         <div className="mt-8 text-center text-gray-500 text-sm">
-          <p>完全离线使用 • 数据仅存储在本地 • 仅显示前5项</p>
+          <p>2025年快结束了，这一年你又经历哪些难忘的瞬间呢？</p>
         </div>
       </div>
     </div>

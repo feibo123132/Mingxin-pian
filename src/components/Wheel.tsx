@@ -192,21 +192,20 @@ const Wheel: React.FC<WheelProps> = ({ cards, onSpinComplete }) => {
         onClick={spin}
         disabled={isSpinning}
         className={`
-          w-22 h-22 rounded-full font-bold text-white text-lg shadow-lg hover:shadow-xl
-          transition-all duration-200 ease-in-out
-          ${isSpinning 
-            ? 'bg-gray-400 cursor-not-allowed' 
-            : 'bg-[#FFD748] hover:bg-yellow-400 active:scale-95'
-          }
+          rounded-full overflow-hidden shadow-lg animate-breath
+          transition-transform duration-200 ease-in-out
+          ${isSpinning ? 'opacity-70 cursor-not-allowed' : 'hover:scale-110 hover:brightness-110'}
         `}
         style={{
           width: '88px',
-          height: '88px',
-          fontSize: '18px',
-          fontWeight: 'bold'
+          height: '88px'
         }}
       >
-        GO
+        <img
+          src={`${(import.meta.env.BASE_URL || '/').replace(/\/?$/, '/') }images/go-btn.png`}
+          alt=""
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
       </button>
     </div>
   );

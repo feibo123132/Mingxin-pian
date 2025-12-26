@@ -11,18 +11,19 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
-  const isAsset = url.pathname.includes('/assets/');
   const isImage = req.destination === 'image' || url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg)$/i);
   const isAudio = req.destination === 'audio' || url.pathname.includes('/audio/');
   if (req.method !== 'GET') return;
-  if (!(isAsset || isImage || isAudio)) return;
+  if (!(isImage || isAudio)) return;
   event.respondWith(
     caches.open(RUNTIME_CACHE).then(async (cache) => {
       const cached = await cache.match(req);
       if (cached) return cached;
       try {
         const res = await fetch(req);
-        if (res.ok) cache.put(req, res.clone());
+        if (res.status === 200 && res.type === 'basic') {
+          try { await cache.put(req, res.clone()); } catch {}
+        }
         return res;
       } catch {
         return cached || Response.error();

@@ -100,7 +100,7 @@ const BgmController: React.FC = () => {
   return (
     <button
       onClick={toggle}
-      className={`absolute top-0 right-10 p-2 rounded-full shadow ${playing ? 'bg-[#FFD748]' : 'bg-gray-200'}`}
+      className={`absolute top-0 left-0 p-2 rounded-full shadow animate-breath ${playing ? 'bg-[#FFD748]' : 'bg-gray-200'}`}
       aria-label="音乐控制"
       title={playing ? '暂停背景音乐' : '播放背景音乐'}
       style={playing ? { animation: 'spin 3s linear infinite' } : undefined}
@@ -111,4 +111,3 @@ const BgmController: React.FC = () => {
 }
 
 export default BgmController
-
